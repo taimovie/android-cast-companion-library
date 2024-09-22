@@ -71,22 +71,22 @@ dependencies {
 
 ext {
     bintrayRepo = 'maven'
-    bintrayName = 'rtmp-client'
+    bintrayName = 'android-cast-companion-library'
 
-    publishedGroupId = 'io.antmedia'
-    libraryName = 'rtmp-client'
-    artifact = 'rtmp-client'
+    publishedGroupId = 'com.google.android.libraries.cast.companionlibrary'
+    libraryName = 'android-cast-companion-library'
+    artifact = 'android-cast-companion-library'
 
     libraryDescription = 'CastCompanionLibrary-android is a library project to enable developers integrate Cast capabilities into their applications faster and easier.'
 
     siteUrl = 'https://github.com/taimovie/android-cast-companion-library'
     gitUrl = 'https://github.com/taimovie/android-cast-companion-library.git'
 
-    libraryVersion = '3.2.0'
+    libraryVersion = '2.8.3'
 
-    developerId = 'mekya'
-    developerName = 'Ahmet Oguz Mermerkaya'
-    developerEmail = 'ahmetmermerkaya@gmail.com'
+    developerId = 'google'
+    developerName = 'Google Android Dev'
+    developerEmail = 'google.android.dev@gmail.com'
 
     licenseName = 'The Apache Software License, Version 2.0'
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
