@@ -69,22 +69,26 @@ android {
     }
 
     buildTypes {
-        debug {
-            libraryVariants.all { variant ->
-                variant.outputs.each { output ->
-                    output.outputFile = new File(output.outputFile.parent, output.outputFile.name.
-                            replace(".aar", "-${versionName}.aar"))
-                }
-            }
+        release {
+            minifyEnabled  false
+            proguardFiles.add(file("proguard-rules.pro"))
         }
-         release {
-            libraryVariants.all { variant ->
-                variant.outputs.each { output ->
-                    output.outputFile = new File(output.outputFile.parent, output.outputFile.name.
-                            replace(".aar", "-${versionName}.aar"))
-                }
-            }
-        }
+        // debug {
+        //     libraryVariants.all { variant ->
+        //         variant.outputs.each { output ->
+        //             output.outputFile = new File(output.outputFile.parent, output.outputFile.name.
+        //                     replace(".aar", "-${versionName}.aar"))
+        //         }
+        //     }
+        // }
+        //  release {
+        //     libraryVariants.all { variant ->
+        //         variant.outputs.each { output ->
+        //             output.outputFile = new File(output.outputFile.parent, output.outputFile.name.
+        //                     replace(".aar", "-${versionName}.aar"))
+        //         }
+        //     }
+        // }
     }
 }
 
