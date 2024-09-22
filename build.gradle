@@ -30,82 +30,61 @@ repositories {
 }
 
 apply plugin: 'com.android.library'
-apply plugin: 'maven-publish'  // Ensure maven-publish plugin is applied
+apply plugin: 'maven-publish'
 
 ext {
-    supportLibVersion = '23.2.1'
+    supportLibVersion = '28.0.0'
     versionName = '2.8.3'
 }
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
-        minSdkVersion 10
-        targetSdkVersion 23
-    }
-
-    sourceSets {
-        main {
-            manifest.srcFile 'AndroidManifest.xml'
-            java.srcDirs = ['src']
-            res.srcDirs = ['res']
-        }
+        minSdkVersion 16
+        targetSdkVersion 30
+        versionName versionName
     }
 
     buildTypes {
-        debug {
-            libraryVariants.all { variant ->
-                variant.outputs.each { output ->
-                    output.outputFile = new File(output.outputFile.parent, output.outputFile.name.replace(".aar", "-${versionName}.aar"))
-                }
-            }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    // Use the new API to rename output files
+    android.libraryVariants.all { variant ->
+        variant.outputs.all { output ->
+            outputFileName = "${variant.name}-${variant.versionName}.aar"
         }
     }
 }
 
 dependencies {
-    compile "com.android.support:appcompat-v7:${supportLibVersion}"
-    compile "com.android.support:mediarouter-v7:${supportLibVersion}"
-    compile 'com.google.android.gms:play-services-cast:8.4.0'
+    implementation "com.android.support:appcompat-v7:${supportLibVersion}"
+    implementation "com.android.support:mediarouter-v7:${supportLibVersion}"
+    implementation 'com.google.android.gms:play-services-cast:8.4.0'
 }
 
-// Configure publishing to JitPack without 'components.release'
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            // Manually specify the AAR file to be published
-            artifact("$buildDir/outputs/aar/android-cast-companion-library-2.8.3.aar") // Adjust the path to your AAR
-
+            from components.release
             groupId = 'com.github.taimovie'
-            artifactId = 'android-cast-companion-library'  // Replace with your actual library name
-            version = 'v1.0.7'
+            artifactId = 'android-cast-companion-library'
+            version = versionName
 
             pom {
-                name = 'android-cast-companion-library'
-                description = 'Description of your library'
+                name = 'Your Library'
+                description = 'A description of your library'
                 url = 'https://github.com/taimovie/android-cast-companion-library'
-
                 licenses {
                     license {
-                        name = 'The Apache Software License, Version 2.0'
+                        name = 'The Apache License, Version 2.0'
                         url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
                     }
-                }
-
-                developers {
-                    developer {
-                        id = 'taimovie'
-                        name = 'TaiMovie Dev'
-                        email = 'dev@taimovie.com'
-                    }
-                }
-
-                scm {
-                    connection = 'scm:git:git://github.com/taimovie/android-cast-companion-library.git'
-                    developerConnection = 'scm:git:ssh://github.com/taimovie/android-cast-companion-library.git'
-                    url = 'https://github.com/taimovie/android-cast-companion-library'
                 }
             }
         }
