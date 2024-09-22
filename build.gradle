@@ -16,7 +16,7 @@
 
 buildscript {
     repositories {
-        google()
+        //google()
         maven {
             url 'https://maven.google.com/'
             name 'Google'
@@ -29,7 +29,7 @@ buildscript {
 }
 
 repositories {
-    google()  // Add Google repository for Android dependencies
+    //google()  // Add Google repository for Android dependencies
     maven {
             url 'https://maven.google.com/'
             name 'Google'
